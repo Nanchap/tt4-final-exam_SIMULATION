@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5156:5156"   # Expose backend API on port 5156
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"       # Expose frontend on port 80
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
